@@ -19,6 +19,12 @@ export const BoxShadow = styled.View`
 
   border-radius: 10px;
   background-color: ${colors.status.primary};
+
+  ${props =>
+    props.disabled &&
+    css`
+      background-color: lightgray;
+    `}
 `;
 
 export const Container = styled.TouchableOpacity``;

@@ -19,15 +19,29 @@ function Home({ navigation }) {
     dispatch(Creators.homeRequest());
   }, []);
 
+  if (!data) return null;
+
+  const { page, total_pages } = data;
+
+  console.tron.log('TESTE', page, total_pages, page > 1, page < total_pages);
+
   return (
     <AppContainer>
       <Text title>Incoming Movies</Text>
       <HomeBody data={data} loading={loading} />
       <S.Footer>
-        <Button onPress={() => {}} isDisabled>
+        <Button
+          onPress={() => dispatch(Creators.homeRequest(page - 1))}
+          disabled={page > 1 == false}
+        >
           Previous
         </Button>
-        <Button onPress={() => {}}>Next</Button>
+        <Button
+          onPress={() => dispatch(Creators.homeRequest(page + 1))}
+          disabled={page < total_pages == false}
+        >
+          Next
+        </Button>
       </S.Footer>
     </AppContainer>
   );

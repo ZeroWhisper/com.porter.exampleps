@@ -6,6 +6,7 @@ export const Types = {
 };
 
 const INITIAL = {
+  page: 1,
   data: null,
   loading: false,
   error: null,
@@ -14,10 +15,19 @@ const INITIAL = {
 function home(state = INITIAL, { type, payload }) {
   switch (type) {
     case Types.SET:
-      return { ...state, home: payload };
+      if (payload.key) {
+        return { ...state, [payload.key]: payload.value };
+      }
+      return state;
 
     case Types.REQUEST:
-      return { ...state, loading: true, error: null, data: null };
+      return {
+        ...state,
+        loading: true,
+        error: null,
+        data: null,
+        page: payload || 1,
+      };
 
     case Types.SUCCESS:
       return { ...state, loading: false, data: payload };

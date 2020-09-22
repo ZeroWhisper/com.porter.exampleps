@@ -7,6 +7,7 @@ export function* request({ payload }) {
   try {
     const params = new URLSearchParams({
       api_key,
+      page: payload,
     });
 
     const url = `/movie/upcoming?${params.toString()}`;
