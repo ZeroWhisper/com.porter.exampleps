@@ -23,8 +23,6 @@ function Home({ navigation }) {
 
   const { page, total_pages } = data;
 
-  console.tron.log('TESTE', page, total_pages, page > 1, page < total_pages);
-
   return (
     <AppContainer>
       <Text title>Incoming Movies</Text>

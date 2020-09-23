@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Redux from 'react-redux';
 
+import Loading from '~/components/Loading';
 import { Creators as DetailCreators } from '~/store/ducks/detail';
 import { getUri } from '~/util';
 
@@ -9,11 +10,19 @@ import * as S from './style';
 function DetailBody() {
   const dispatch = Redux.useDispatch();
 
-  const { data } = Redux.useSelector(state => state.detail);
+  const { data, loading } = Redux.useSelector(state => state.detail);
 
   React.useEffect(() => {
     dispatch(DetailCreators.detailRequest());
   }, []);
+
+  if (loading) {
+    return (
+      <S.Container>
+        <Loading />
+      </S.Container>
+    );
+  }
 
   if (!data) return null;
 
